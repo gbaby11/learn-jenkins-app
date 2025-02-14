@@ -22,6 +22,7 @@ pipeline {
             
         }
         stage('Test'){
+            reuseNode true
             steps{
                 echo "Test stage"
                 sh '''
