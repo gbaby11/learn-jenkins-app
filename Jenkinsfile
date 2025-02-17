@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        /*
+        
 
         stage('Build') {
             agent {
@@ -22,24 +22,27 @@ pipeline {
                 '''
             }
         }
-        */
+        
+        stage{
+            parallel{
+                stage('Test') {
+                    agent {
+                        docker {
+                            image 'node:18-alpine'
+                            reuseNode true
+                        }
+                    }
 
-        stage('Test') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
+                    steps {
+                        sh '''
+                            #test -f build/index.html
+                            npm test
+                        '''
+                    }
                 }
-            }
 
-            steps {
-                sh '''
-                    #test -f build/index.html
-                    npm test
-                '''
             }
         }
-
         stage('E2E') {
             agent {
                 docker {
