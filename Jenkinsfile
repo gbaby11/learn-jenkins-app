@@ -34,7 +34,7 @@ pipeline {
                     }
 
                     steps {
-                        echo "parallel"
+                        echo "paralle"
                         sh '''
                             #test -f build/index.html
                             npm test
