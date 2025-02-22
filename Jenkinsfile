@@ -94,6 +94,14 @@ pipeline {
             }
         }
 
+        stage{
+            steps{
+                timeout(time: 1, unit: 'MINUTES') {
+                    input 'Are you sure, you want to deploy?'
+                }
+            }
+        }
+
         stage('Deploy prod') {
             agent {
                 docker {
